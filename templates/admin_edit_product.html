@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="admin-edit-product">
+    <h2>Edit Product</h2>
+    <form method="POST" class="form-box">
+        <label>Name:</label>
+        <input type="text" name="name" value="{{ product.name }}" required>
+
+        <label>Description:</label>
+        <textarea name="description">{{ product.description }}</textarea>
+
+        <label>Price:</label>
+        <input type="number" name="price" value="{{ product.price }}" step="0.01" required>
+
+        <label>Stock:</label>
+        <input type="number" name="stock" value="{{ product.stock }}" required>
+
+        <label>Image URL:</label>
+        <input type="text" name="image" value="{{ product.image }}">
+
+        <button type="submit">Save Changes</button>
+    </form>
+</section>
+{% endblock %}

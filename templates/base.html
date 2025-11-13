@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MystiFlora</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">🌸 MystiFlora</div>
+       <ul class="nav-links">
+    <li><a href="{{ url_for('home') }}">Home</a></li>
+    <li><a href="{{ url_for('about') }}">About</a></li>
+    <li><a href="{{ url_for('story') }}">Our Story</a></li>
+    <li><a href="{{ url_for('shop') }}">Shop</a></li>
+    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+    <li><a href="{{ url_for('cart') }}">Cart</a></li>
+
+            {% if user %}
+                <li class="welcome">Hi, {{ user }}!</li>
+                <li><a href="{{ url_for('logout') }}" class="btn">Logout</a></li>
+            {% else %}
+                <li><a href="{{ url_for('login') }}" class="btn">Login</a></li>
+                <li><a href="{{ url_for('signup') }}" class="btn">Sign Up</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <main>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash">
+                    {% for msg in messages %}
+                        <p>{{ msg }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2025 MystiFlora | Crafted with 🌷 by Ella</p>
+    </footer>
+</body>
+</html>

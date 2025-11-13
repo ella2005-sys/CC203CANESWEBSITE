@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="admin-dashboard">
+    <h2>Admin Dashboard</h2>
+    <a href="{{ url_for('admin_add_product') }}" class="btn">➕ Add New Product</a>
+
+    <h3>Orders</h3>
+    <table class="data-table">
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Total</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.name }}</td>
+            <td>₱{{ order.total }}</td>
+            <td>{{ order.status }}</td>
+            <td>
+                <a href="{{ url_for('admin_order_details', order_id=order.id) }}">View</a> |
+                <a href="{{ url_for('admin_update_status', order_id=order.id) }}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Products</h3>
+    <table class="data-table">
+        <tr>
+            <th>ID</th><th>Name</th><th>Price</th><th>Stock</th><th>Actions</th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>₱{{ product.price }}</td>
+            <td>{{ product.stock }}</td>
+            <td>
+                <a href="{{ url_for('admin_edit_product', product_id=product.id) }}">Edit</a> |
+                <a href="{{ url_for('admin_delete_product', product_id=product.id) }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+{% endblock %}

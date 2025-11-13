@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="form-page">
+    <h1>Contact Us</h1>
+    <p>We’d love to hear from you! Send us a message below.</p>
+
+    <form method="POST" class="form-box contact-form">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+        <button type="submit" class="cta-btn">Send Message</button>
+    </form>
+
+    <div class="contact-details">
+        <p>📞 (02) 3456 7890</p>
+        <p>📧 hello@mystiflora.ph</p>
+        <p>📍 Cebu City, Philippines</p>
+    </div>
+</section>
+{% endblock %}

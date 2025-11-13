@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+/* Hero Section */
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5rem 2rem 3rem;
+
+    /* Background image */
+    background-image: url("{{ url_for('static', filename='images/hero-bg.jpg') }}");
+    background-size: cover;       /* Make image cover entire section */
+    background-position: center;  /* Center the image */
+    background-repeat: no-repeat; /* Don't repeat the image */
+
+    color: #b34786;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+.hero p {
+    font-size: 1.2rem;
+    color: #8c2d5f;
+    max-width: 700px;
+    line-height: 1.7;
+}
+
+/* Featured Products */
+.featured {
+    text-align: center;
+    padding: 3rem 2rem 5rem;
+    background-color: #fff0f6;
+}
+.featured h3 {
+    font-size: 2rem;
+    color: #b34786;
+    margin-bottom: 3rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.product-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 20px rgba(183, 126, 220, 0.15);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(183, 126, 220, 0.3);
+}
+.product-card img {
+    width: 100%;
+    max-width: 220px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+}
+.product-card h4, .product-card h3 {
+    font-size: 1.3rem;
+    color: #b34786;
+    margin-bottom: 0.5rem;
+}
+.product-card p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+.price {
+    font-size: 1.2rem;
+    color: #b34786;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+.add-btn {
+    background: #ff99c8;
+    border: none;
+    padding: 8px 14px;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+}
+.add-btn:hover {
+    background: #e673b8;
+}
+</style>
+
+<section class="hero">
+    <h1>Welcome to MystiFlora</h1>
+    <p>Where every petal tells a story of love and beauty.</p>
+</section>
+
+<section class="featured">
+    <h3>🌸 Featured Blooms 🌸</h3>
+    <div class="product-grid">
+        <!-- Product 1 -->
+        <div class="product-card">
+            <img src="{{ url_for('static', filename='images/flower1.jpg')}}" alt="Lilies Bouquet">
+            <h3>Purities Embrace</h3>
+            <p>A serene and classic arrangement symbolizing innocence, majesty, and renewal.</p>
+            <p class="price">₱1899.00</p>
+            <form action="{{ url_for('add_to_cart', product_id=1) }}" method="POST">
+                <button type="submit" class="add-btn">Add to Cart</button>
+            </form>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-card">
+            <img src="{{ url_for('static', filename='images/flower2.jpg')}}" alt="Mistletoes">
+            <h3>Holly Kisses</h3>
+            <p>A charming bouquet perfect for the festive season, whites and pinks capturing heartwarming spirit.</p>
+            <p class="price">₱2399.00</p>
+            <form action="{{ url_for('add_to_cart', product_id=2) }}" method="POST">
+                <button type="submit" class="add-btn">Add to Cart</button>
+            </form>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card">
+            <img src="{{ url_for('static', filename='images/flower3.jpg')}}" alt="Sunflowers">
+            <h3>Sunny Delight</h3>
+            <p>Bright and cheerful sunflowers that bring sunshine into your home.</p>
+            <p class="price">₱1299.00</p>
+            <form action="{{ url_for('add_to_cart', product_id=3) }}" method="POST">
+                <button type="submit" class="add-btn">Add to Cart</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

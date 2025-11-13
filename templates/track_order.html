@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="track-order">
+    <h2>Track Your Order</h2>
+    <form action="{{ url_for('tracking_result') }}" method="POST" class="form-box">
+        <label for="order_id">Enter Your Order ID:</label>
+        <input type="text" name="order_id" id="order_id" placeholder="e.g. 12345" required>
+        <button type="submit">Track</button>
+    </form>
+</section>
+{% endblock %}

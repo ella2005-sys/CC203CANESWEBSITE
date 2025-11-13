@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="tracking-result">
+    <h2>Order Tracking Result</h2>
+
+    {% if order %}
+        <div class="order-card">
+            <p><strong>Order ID:</strong> {{ order.id }}</p>
+            <p><strong>Status:</strong> {{ order.status }}</p>
+            <p><strong>Customer Name:</strong> {{ order.name }}</p>
+            <p><strong>Shipping Address:</strong> {{ order.address }}</p>
+            <p><strong>Payment Method:</strong> {{ order.payment_method }}</p>
+            <p><strong>Total:</strong> ₱{{ order.total }}</p>
+        </div>
+    {% else %}
+        <p>No order found with that ID. Please check and try again.</p>
+    {% endif %}
+</section>
+{% endblock %}

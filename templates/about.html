@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+        text-align: center;
+        padding: 2rem;
+
+        /* Background image with pink gradient overlay */
+        background: linear-gradient(rgba(255,228,240,0.6), rgba(255,214,232,0.6)),
+                    url("{{ url_for('static', filename='images/about-bg.jpg') }}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        color: #b34786;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .info h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #b34786;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .info p {
+        max-width: 700px;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        margin-bottom: 1rem;
+    }
+</style>
+
+<section class="info">
+    <h2>About MystiFlora</h2>
+    <p>
+        MystiFlora is a cozy floral boutique where passion blooms.
+        We believe in creating arrangements that speak from the heart, crafted with love and artistry.
+    </p>
+    <p>
+        Our mission is to bring beauty, joy, and elegance into every home through thoughtfully designed floral creations.
+    </p>
+</section>
+{% endblock %}

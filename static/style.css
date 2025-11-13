@@ -1,0 +1,244 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff8f9;
+    color: #333;
+    margin: 0;
+}
+
+/* Navbar */
+.navbar {
+    background: #ffe3ec;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #d63384;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1.2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #d63384;
+}
+
+.btn {
+    background: #d63384;
+    color: white !important;
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background: #c21869;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(255,200,210,0.6), rgba(255,200,210,0.6)), url('https://i.imgur.com/Yt4D2bD.jpg') center/cover no-repeat;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-text {
+    background: rgba(255,255,255,0.8);
+    padding: 2rem;
+    border-radius: 20px;
+    width: 80%;
+}
+
+.hero-text h1 {
+    font-size: 2.5rem;
+    color: #d63384;
+}
+
+.hero-text span {
+    color: #ff4fa3;
+}
+
+.cta-btn {
+    background: #d63384;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    margin-top: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.cta-btn:hover {
+    background: #c21869;
+}
+
+/* Featured Products */
+.featured {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.product-card {
+    background: #fff;
+    border-radius: 15px;
+    width: 250px;
+    padding: 1rem;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: scale(1.05);
+}
+
+.product-card img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+/* Forms */
+.form-page {
+    text-align: center;
+    padding: 3rem;
+}
+
+.form-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.form-box input {
+    width: 250px;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+/* SHOP PAGE */
+.shop {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+.shop-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+}
+.shop-card {
+    background: #fff;
+    border-radius: 15px;
+    width: 230px;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+.shop-card:hover {
+    transform: scale(1.05);
+}
+.shop-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+}
+.price {
+    color: #c21869;
+    font-weight: 600;
+    margin: 0.5rem 0;
+}
+.add-btn {
+    background: #d63384;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.3s;
+}
+.add-btn:hover {
+    background: #c21869;
+}
+
+/* CART PAGE */
+.cart-table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    width: 60%;
+}
+.cart-table th, .cart-table td {
+    border: 1px solid #f4c2d7;
+    padding: 10px;
+}
+.cart-table th {
+    background: #ffe3ec;
+}
+.cart-total {
+    margin-top: 1rem;
+    color: #d63384;
+}
+
+/* CONTACT FORM */
+.contact-form textarea {
+    width: 250px;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    resize: none;
+}
+
+.contact-details {
+    margin-top: 2rem;
+    text-align: center;
+    color: #555;
+}
+
+
+
+/* Flash + Footer */
+.flash {
+    background: #ffe0ea;
+    color: #c21869;
+    text-align: center;
+    padding: 0.7rem;
+    margin: 1rem auto;
+    width: 60%;
+    border-radius: 10px;
+}
+
+footer {
+    background: #ffe3ec;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #555;
+}
