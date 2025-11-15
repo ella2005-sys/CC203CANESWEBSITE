@@ -112,6 +112,93 @@ def story():
     user = session.get('user')
     return render_template('story.html', user=user)
 
+@app.route('/occasion/<type>')
+def occasion(type):
+    # Messages for each occasion
+    occasions = {
+        'wedding': "Elegant floral arrangements perfect for weddings — symbolizing love and new beginnings.",
+        'birthday': "Bright, cheerful blooms to make birthdays even more special.",
+        'anniversary': "Romantic bouquets designed to celebrate lasting love.",
+        'graduation': "Fresh congratulatory flowers for celebrating achievements and success.",
+        'valentines': "Roses and more — express your love this Valentine’s Day."
+    }
+    message = occasions.get(type.lower(), "Explore our flower collections for every special moment.")
+
+    # Products for each occasion
+    products = {
+        'wedding': [
+            {'id':1, 'name':'Purities Embrace', 'description':'White lilies symbolizing innocence and renewal.', 'price':1899, 'image':'flower1.jpg'},
+            {'id':2, 'name':'Holly Kisses', 'description':'Charming bouquet of whites and pinks.', 'price':2399, 'image':'flower2.jpg'},
+            {'id':3, 'name':'Sunny Delight', 'description':'Bright sunflowers that bring sunshine.', 'price':1299, 'image':'flower3.jpg'}
+        ],
+        'birthday': [
+            {'id':4, 'name':'Pastel Dreams', 'description':'Soft pastel flowers perfect for birthdays.', 'price':1699, 'image':'flower5.jpg'},
+            {'id':5, 'name':'Rainbow Mix', 'description':'Vibrant mix of blooms to brighten any birthday.', 'price':1499, 'image':'flower9.jpg'}
+        ],
+        'anniversary': [
+            {'id':6, 'name':'Romantic Roses', 'description':'Classic red roses to express love.', 'price':1599, 'image':'flower4.jpg'},
+            {'id':7, 'name':'Blushing Beauty', 'description':'Soft pink roses for a gentle touch of romance.', 'price':1799, 'image':'flower7.jpg'}
+        ],
+        'graduation': [
+            {'id':8, 'name':'Bright Congrats', 'description':'Cheerful blooms to celebrate success.', 'price':1399, 'image':'flower10.jpg'}
+        ],
+        'valentines': [
+            {'id':9, 'name':'Valentine’s Roses', 'description':'Romantic red roses to express your love.', 'price':1999, 'image':'flower11.jpg'}
+        ]
+    }
+
+    # Get the products for the requested occasion, default to empty list if none
+    occasion_products = products.get(type.lower(), [])
+
+    return render_template(
+        'occasion.html',
+        occasion_type=type.capitalize(),
+        message=message,
+        occasion_products=occasion_products
+    )
+
+
+
+
+
+
+# --- Custom Bouquet Builder ---
+@app.route('/builder', methods=['GET', 'POST'])
+def bouquet_builder():
+    flowers = ['Roses', 'Tulips', 'Sunflowers', 'Lilies', 'Carnations']
+    colors = ['Red', 'Pink', 'White', 'Yellow', 'Purple']
+    wrappers = ['Classic Brown', 'Pastel Pink', 'Elegant White', 'Rustic Kraft']
+
+    if request.method == 'POST':
+        selected_flowers = request.form.getlist('flowers')
+        color = request.form.get('color')
+        wrapper = request.form.get('wrapper')
+        message = request.form.get('message')
+
+        # Just for demo: simulate a price
+        price = len(selected_flowers) * 150
+
+        return render_template(
+            'bouquet_preview.html',
+            selected_flowers=selected_flowers,
+            color=color,
+            wrapper=wrapper,
+            message=message,
+            price=price
+        )
+
+    return render_template(
+        'bouquet_builder.html',
+        flowers=flowers,
+        colors=colors,
+        wrappers=wrappers
+    )
+
+
+
+
+
+
 # ---------------- Cart routes ----------------
 @app.route('/add_to_cart/<int:product_id>', methods=['POST'])
 def add_to_cart(product_id):

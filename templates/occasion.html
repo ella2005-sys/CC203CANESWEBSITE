@@ -10,7 +10,7 @@
     align-items: center;
     text-align: center;
     padding: 5rem 2rem 3rem;
-    background-image: url("{{ url_for('static', filename='images/bg.jpg') }}");
+    background-image: url("{{ url_for('static', filename='images/wedding-bg.jpeg') }}");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -99,20 +99,21 @@
 }
 </style>
 
+
 <!-- Hero Section -->
 <section class="hero">
-    <h1>Welcome to MystiFlora</h1>
-    <p>Explore our wide selection of blooms for every occasion — crafted with love and elegance.</p>
+    <h1>{{ occasion_type }} Flowers</h1>
+    <p>{{ message }}</p>
 </section>
 
 <!-- Shop Section -->
 <section class="shop-section">
     <h3>🌸 Our Collection 🌸</h3>
     <div class="shop-grid">
-
+            {% for product in occasion_products %}
         <!-- Product 1 -->
         <div class="product-card">
-            <img src="{{ url_for('static', filename='images/flower1.jpg') }}" alt="Purities Embrace">
+            <img src="{{ url_for('static', filename='images/wedding1.jpeg') }}" alt="Purities Embrace">
             <h3>Purities Embrace</h3>
             <p>White lilies symbolizing innocence and renewal.</p>
             <p class="price">₱1899.00</p>
@@ -123,7 +124,7 @@
 
         <!-- Product 2 -->
         <div class="product-card">
-            <img src="{{ url_for('static', filename='images/flower2.jpg') }}" alt="Holly Kisses">
+            <img src="{{ url_for('static', filename='images/wedding2.jpeg') }}" alt="Holly Kisses">
             <h3>Holly Kisses</h3>
             <p>A charming bouquet of whites and pinks capturing the festive spirit.</p>
             <p class="price">₱2399.00</p>
@@ -134,7 +135,7 @@
 
         <!-- Product 3 -->
         <div class="product-card">
-            <img src="{{ url_for('static', filename='images/flower3.jpg') }}" alt="Sunny Delight">
+            <img src="{{ url_for('static', filename='images/wedding3.jpeg') }}" alt="Sunny Delight">
             <h3>Sunny Delight</h3>
             <p>Bright and cheerful sunflowers to light up your day.</p>
             <p class="price">₱1299.00</p>
@@ -145,7 +146,7 @@
 
         <!-- Product 4 -->
         <div class="product-card">
-            <img src="{{ url_for('static', filename='images/flower4.jpg') }}" alt="Romantic Roses">
+            <img src="{{ url_for('static', filename='images/wedding4.jpeg') }}" alt="Romantic Roses">
             <h3>Romantic Roses</h3>
             <p>Classic red roses to express deep love and passion.</p>
             <p class="price">₱1599.00</p>
@@ -156,7 +157,7 @@
 
         <!-- Product 5 -->
         <div class="product-card">
-            <img src="{{ url_for('static', filename='images/flower5.jpg') }}" alt="Pastel Dreams">
+            <img src="{{ url_for('static', filename='images/wedding5.jpeg') }}" alt="Pastel Dreams">
             <h3>Pastel Dreams</h3>
             <p>Soft pastel flowers perfect for birthdays or thank-you gifts.</p>
             <p class="price">₱1699.00</p>
@@ -167,7 +168,7 @@
 
         <!-- Product 6 -->
         <div class="product-card">
-            <img src="{{ url_for('static', filename='images/flower6.jpg') }}" alt="Lavender Bliss">
+            <img src="{{ url_for('static', filename='images/wedding6.jpeg') }}" alt="Lavender Bliss">
             <h3>Lavender Bliss</h3>
             <p>Fragrant lavender blooms that bring calm and grace.</p>
             <p class="price">₱1999.00</p>
@@ -178,7 +179,7 @@
 
         <!-- Product 7 -->
         <div class="product-card">
-            <img src="{{ url_for('static', filename='images/flower7.jpg') }}" alt="Blushing Beauty">
+            <img src="{{ url_for('static', filename='images/wedding7.jpeg') }}" alt="Blushing Beauty">
             <h3>Blushing Beauty</h3>
             <p>Soft pink roses for a gentle touch of romance.</p>
             <p class="price">₱1799.00</p>
@@ -189,7 +190,7 @@
 
         <!-- Product 8 -->
         <div class="product-card">
-            <img src="{{ url_for('static', filename='images/flower8.jpg') }}" alt="Tropical Glow">
+            <img src="{{ url_for('static', filename='images/wedding8.jpeg') }}" alt="Tropical Glow">
             <h3>Tropical Glow</h3>
             <p>Vibrant tropical blooms for a burst of color and joy.</p>
             <p class="price">₱2499.00</p>
@@ -197,9 +198,8 @@
                 <button type="submit" class="add-btn">Add to Cart</button>
             </form>
         </div>
-
+ {% endfor %}
     </div>
 </section>
 
 {% endblock %}
-

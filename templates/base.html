@@ -9,13 +9,25 @@
 <body>
     <nav class="navbar">
         <div class="logo">🌸 MystiFlora</div>
-       <ul class="nav-links">
+      <ul class="nav-links">
     <li><a href="{{ url_for('home') }}">Home</a></li>
+    <li><a href="{{ url_for('shop') }}">Shop</a></li>
+    <li class="dropdown">
+        <a href="#">Occasions ▾</a>
+        <ul class="dropdown-menu">
+            <li><a href="{{ url_for('occasion', type='wedding') }}">Weddings</a></li>
+            <li><a href="{{ url_for('occasion', type='birthday') }}">Birthdays</a></li>
+            <li><a href="{{ url_for('occasion', type='anniversary') }}">Anniversaries</a></li>
+            <li><a href="{{ url_for('occasion', type='graduation') }}">Graduations</a></li>
+            <li><a href="{{ url_for('occasion', type='valentines') }}">Valentine’s Day</a></li>
+        </ul>
+    </li>
     <li><a href="{{ url_for('about') }}">About</a></li>
     <li><a href="{{ url_for('story') }}">Our Story</a></li>
-    <li><a href="{{ url_for('shop') }}">Shop</a></li>
     <li><a href="{{ url_for('contact') }}">Contact</a></li>
     <li><a href="{{ url_for('cart') }}">Cart</a></li>
+    <li><a href="{{ url_for('bouquet_builder') }}">Custom Bouquet</a></li>
+
 
             {% if user %}
                 <li class="welcome">Hi, {{ user }}!</li>

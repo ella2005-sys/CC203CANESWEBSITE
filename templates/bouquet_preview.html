@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .preview {
+        max-width: 600px;
+        margin: 2rem auto;
+        background: #fff0f6;
+        padding: 2rem;
+        border-radius: 20px;
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+    }
+    h2 {
+        color: #d63384;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+        color: #555;
+    }
+    .price {
+        font-size: 1.3rem;
+        color: #ff3399;
+        font-weight: bold;
+        margin: 1rem 0;
+    }
+    a {
+        text-decoration: none;
+        color: #fff;
+        background: #ff4da6;
+        padding: 0.6rem 1.2rem;
+        border-radius: 10px;
+        display: inline-block;
+        margin-top: 1rem;
+        transition: 0.3s;
+    }
+    a:hover {
+        background: #e60073;
+    }
+</style>
+
+<div class="preview">
+    <h2>✨ Your Custom Bouquet ✨</h2>
+    <ul>
+        <li><strong>Flowers:</strong> {{ selected_flowers | join(', ') }}</li>
+        <li><strong>Color:</strong> {{ color }}</li>
+        <li><strong>Wrapper:</strong> {{ wrapper }}</li>
+        <li><strong>Message:</strong> "{{ message }}"</li>
+    </ul>
+    <div class="price">Estimated Price: ₱{{ price }}</div>
+    <a href="{{ url_for('bouquet_builder') }}">Build Another</a>
+</div>
+{% endblock %}
