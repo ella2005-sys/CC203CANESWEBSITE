@@ -1,22 +1,118 @@
 {% extends 'base.html' %}
 {% block content %}
+
+<style>
+    /* Styling consistent with the Pink/Floral theme */
+
+    /* General Container (Card) */
+    .admin-add-product {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 18px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        font-family: 'Inter', sans-serif;
+    }
+
+    /* Heading Style */
+    .admin-add-product h2 {
+        color: #b34786; /* Primary dark pink */
+        border-bottom: 3px solid #fce8f4; /* Light pink border */
+        padding-bottom: 15px;
+        margin-bottom: 25px;
+        font-size: 2.2rem;
+        font-weight: 800;
+        text-align: center;
+    }
+
+    /* Form Layout */
+    .form-box {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* Labels */
+    .form-box label {
+        font-weight: 600;
+        color: #8c2d5f; /* Darkest accent */
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    /* Inputs and Textarea */
+    .form-box input[type="text"],
+    .form-box input[type="number"],
+    .form-box textarea {
+        padding: 12px;
+        border: 1px solid #ff99c8; /* Soft pink border */
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s, box-shadow 0.3s;
+        background-color: #fffafa; /* Very light pink background */
+    }
+
+    /* Focus State */
+    .form-box input[type="text"]:focus,
+    .form-box input[type="number"]:focus,
+    .form-box textarea:focus {
+        border-color: #b34786; /* Focus border color */
+        box-shadow: 0 0 0 3px rgba(179, 71, 134, 0.2); /* Soft pink focus ring */
+        outline: none;
+    }
+
+    .form-box textarea {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    /* Submit Button */
+    .form-box button[type="submit"] {
+        padding: 14px;
+        background-color: #8c2d5f; /* Darkest accent button */
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        margin-top: 15px;
+        box-shadow: 0 4px 10px rgba(140, 45, 95, 0.3); /* Pink shadow */
+    }
+
+    .form-box button[type="submit"]:hover {
+        background-color: #b34786; /* Primary dark pink on hover */
+        transform: translateY(-1px);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+        .admin-add-product {
+            margin: 20px;
+            padding: 20px;
+        }
+    }
+</style>
+
 <section class="admin-add-product">
     <h2>Add New Product</h2>
     <form method="POST" class="form-box">
-        <label>Name:</label>
-        <input type="text" name="name" required>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
 
-        <label>Description:</label>
-        <textarea name="description"></textarea>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description"></textarea>
 
-        <label>Price:</label>
-        <input type="number" name="price" step="0.01" required>
+        <label for="price">Price (₱):</label>
+        <input type="number" id="price" name="price" step="0.01" required>
 
-        <label>Stock:</label>
-        <input type="number" name="stock" required>
+        <label for="stock">Stock Quantity:</label>
+        <input type="number" id="stock" name="stock" required>
 
-        <label>Image URL:</label>
-        <input type="text" name="image">
+        <label for="image">Image Filename (e.g., v1.jpg):</label>
+        <input type="text" id="image" name="image">
 
         <button type="submit">Add Product</button>
     </form>

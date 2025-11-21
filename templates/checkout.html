@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+.checkout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 90vh;
+    padding: 3rem 2rem;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffc0cb, #ff99cc); /* pink gradient background */
+}
+
+.checkout h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color: #ff0066; /* deep pink */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.checkout form {
+    background: rgba(255, 192, 203, 0.2);
+    backdrop-filter: blur(6px);
+    padding: 2.5rem;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 500px;
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+.checkout label {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.checkout input, .checkout select {
+    width: 100%;
+    padding: 0.9rem;
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 10px;
+    font-size: 1rem;
+    background: rgba(255,182,193,0.2); /* light pink input */
+    color: #fff;
+}
+
+.checkout input::placeholder, .checkout select {
+    color: rgba(255,255,255,0.8);
+}
+
+.checkout input:focus, .checkout select:focus {
+    border-color: #ff3399; /* pink border focus */
+    background-color: rgba(255,105,180,0.2);
+    outline: none;
+}
+
+.checkout button {
+    margin-top: 1.5rem;
+    width: 100%;
+    padding: 0.9rem;
+    background-color: #ff3399; /* pink button */
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.checkout button:hover {
+    background-color: #ff66aa;
+    transform: scale(1.02);
+}
+
+.checkout .order-summary {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(255, 182, 193, 0.2);
+    backdrop-filter: blur(4px);
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+.checkout .order-summary h4 {
+    margin-bottom: 1rem;
+    color: #ff0066;
+}
+
+.checkout .order-summary li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.checkout .order-summary img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 0.8rem;
+}
+</style>
+
+<section class="checkout">
+    <h2>💖 Checkout</h2>
+
+    {% if cart_items %}
+    <form action="{{ url_for('process_checkout') }}" method="POST">
+        <label for="fullname">Full Name</label>
+        <input type="text" name="fullname" id="fullname" placeholder="Your full name" required>
+
+        <label for="address">Address</label>
+        <input type="text" name="address" id="address" placeholder="Your address" required>
+
+        <label for="contact">Contact Number</label>
+        <input type="text" name="contact" id="contact" placeholder="Your phone number" required>
+
+        <label for="payment">Payment Method</label>
+        <select name="payment" id="payment" required>
+            <option value="" disabled selected>Select a payment method</option>
+            <option value="Cash on Delivery">Cash on Delivery (COD)</option>
+            <option value="GCash">GCash</option>
+            <option value="Credit/Debit Card">Credit/Debit Card</option>
+        </select>
+
+        <button type="submit">Place Order</button>
+    </form>
+
+    <ul class="order-summary">
+        <h4>Order Summary</h4>
+        {% for item in cart_items %}
+        <li>
+            <div style="display:flex; align-items:center;">
+                <img src="{{ url_for('static', filename=item.image) }}" alt="{{ item.name }}">
+                <div>{{ item.name }} x {{ item.quantity }}</div>
+            </div>
+            <div>₱{{ '%.2f'|format(item.item_total) }}</div>
+        </li>
+        {% endfor %}
+        <li style="font-weight:600; border-top:1px solid rgba(255,255,255,0.3); padding-top:0.5rem;">
+            <span>Total</span>
+            <span>₱{{ '%.2f'|format(total) }}</span>
+        </li>
+    </ul>
+    {% else %}
+    <p>Your cart is empty. <a href="{{ url_for('shop') }}" style="color:#ff3399;">Shop now!</a></p>
+    {% endif %}
+</section>
+{% endblock %}

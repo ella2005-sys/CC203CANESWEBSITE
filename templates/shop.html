@@ -2,204 +2,361 @@
 {% block content %}
 
 <style>
-/* Hero Section */
+/* Hero */
 .hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 5rem 2rem 3rem;
-    background-image: url("{{ url_for('static', filename='images/bg.jpg') }}");
+    background-image: url("{{ url_for('static', filename='images/wedding-bg.jpeg') }}");
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    color: #b34786;
-}
-.hero h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-.hero p {
-    font-size: 1.2rem;
-    color: #8c2d5f;
-    max-width: 700px;
-    line-height: 1.7;
+    padding: 5rem 2rem 3rem;
+    text-align: center;
+    color: white;
 }
 
-/* Shop Section */
-.shop-section {
-    text-align: center;
-    padding: 4rem 2rem;
-    background-color: #fff0f6;
+/* Product Grid */
+.products-section {
+    padding: 4rem 3rem; /* More space around the grid */
 }
-.shop-section h3 {
-    font-size: 2rem;
-    color: #b34786;
-    margin-bottom: 3rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-.shop-grid {
+
+.products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Slightly wider cards */
+    gap: 3rem; /* MORE SPACE between cards */
 }
+
+/* Card */
 .product-card {
-    background: #fff;
-    border-radius: 20px;
-    padding: 1.5rem;
-    box-shadow: 0 8px 20px rgba(183, 126, 220, 0.15);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 1.8rem;                 /* More inner spacing */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    transition: 0.3s ease-in-out;
 }
+
 .product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(183, 126, 220, 0.3);
+    transform: translateY(-7px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.18);
 }
+
 .product-card img {
     width: 100%;
-    max-width: 220px;
-    height: 220px;
-    object-fit: cover;
+    height: 230px;
     border-radius: 15px;
-    margin-bottom: 1rem;
+    object-fit: cover;
+    margin-bottom: 1rem;            /* Space under image */
 }
-.product-card h3 {
-    font-size: 1.3rem;
-    color: #b34786;
-    margin-bottom: 0.5rem;
-}
-.product-card p {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 0.5rem;
-}
+
 .price {
-    font-size: 1.2rem;
-    color: #b34786;
-    font-weight: 600;
-    margin-top: 0.5rem;
+    font-weight: bold;
+    color: #e63946;
+    margin-top: 0.7rem;
 }
-.add-btn {
-    background: #ff99c8;
-    border: none;
-    padding: 8px 14px;
+
+/* Button */
+button {
+    background: #e63946;
     color: white;
-    border-radius: 6px;
+    border: none;
+    padding: 0.9rem 1.3rem;
+    border-radius: 10px;
     cursor: pointer;
-    width: 100%;
-    transition: 0.3s;
+    margin-top: 1.2rem;
+    width: 100%;                    /* Full-width button */
+    font-size: 1rem;
+    transition: 0.2s;
 }
-.add-btn:hover {
-    background: #e673b8;
+
+button:hover {
+    background: #c82333;
 }
 </style>
 
-<!-- Hero Section -->
-<section class="hero">
-    <h1>Welcome to MystiFlora</h1>
-    <p>Explore our wide selection of blooms for every occasion — crafted with love and elegance.</p>
-</section>
 
-<!-- Shop Section -->
-<section class="shop-section">
-    <h3>🌸 Our Collection 🌸</h3>
-    <div class="shop-grid">
+<!-- HERO SECTION -->
+<div class="hero">
+    <h1>All Flowers</h1>
+    <p>Explore our beautifully handcrafted arrangements</p>
+</div>
 
-        <!-- Product 1 -->
+<!-- PRODUCT GRID -->
+<section class="products-section">
+    <div class="products-grid">
+
+
         <div class="product-card">
-            <img src="{{ url_for('static', filename='images/flower1.jpg') }}" alt="Purities Embrace">
-            <h3>Purities Embrace</h3>
-            <p>White lilies symbolizing innocence and renewal.</p>
-            <p class="price">₱1899.00</p>
-            <form action="{{ url_for('add_to_cart', product_id=1) }}" method="POST">
-                <button type="submit" class="add-btn">Add to Cart</button>
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/wedding/wedding1.jpeg') }}" alt="1">
+            <h3>The Rose All Day Bouquet</h3>
+            <p>A charming and lush arrangement of creamy blush Roses and fluffy pink Chrysanthemums, accented with delicate misty filler, wrapped perfectly for a romantic and soft presentation.</p>
+            <p class="price">₱1899</p>
+             <!-- Corrected Product ID: ID 1 -->
+             <form action="{{ url_for('add_to_cart', product_id=1) }}" method="POST">
+                 <label>Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
             </form>
+
         </div>
 
-        <!-- Product 2 -->
+
         <div class="product-card">
-            <img src="{{ url_for('static', filename='images/flower2.jpg') }}" alt="Holly Kisses">
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/wedding/wedding2.jpeg') }}" alt="2">
             <h3>Holly Kisses</h3>
-            <p>A charming bouquet of whites and pinks capturing the festive spirit.</p>
-            <p class="price">₱2399.00</p>
-            <form action="{{ url_for('add_to_cart', product_id=2) }}" method="POST">
-                <button type="submit" class="add-btn">Add to Cart</button>
+            <p>A charming bouquet of whites and pinks capturing the festive spirit</p>
+            <p class="price">₱1899</p>
+             <!-- Corrected Product ID: ID 2 -->
+             <form action="{{ url_for('add_to_cart', product_id=2) }}" method="POST">
+                  <label>Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
             </form>
         </div>
 
-        <!-- Product 3 -->
+
         <div class="product-card">
-            <img src="{{ url_for('static', filename='images/flower3.jpg') }}" alt="Sunny Delight">
-            <h3>Sunny Delight</h3>
-            <p>Bright and cheerful sunflowers to light up your day.</p>
-            <p class="price">₱1299.00</p>
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/wedding/wedding3.jpeg') }}" alt="3">
+            <h3>The Ethereal Spire Bouquet</h3>
+            <p>>An elegant, clean, and modern arrangement of pristine White Calla Lilies given an ethereal softness by delicate, whispering airy grass and filler.</p>
+            <p class="price">₱1299</p>
+            <!-- Corrected Product ID: ID 3 -->
             <form action="{{ url_for('add_to_cart', product_id=3) }}" method="POST">
-                <button type="submit" class="add-btn">Add to Cart</button>
+                <label>Quantity:</label>
+                <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
             </form>
         </div>
 
-        <!-- Product 4 -->
+
         <div class="product-card">
-            <img src="{{ url_for('static', filename='images/flower4.jpg') }}" alt="Romantic Roses">
-            <h3>Romantic Roses</h3>
-            <p>Classic red roses to express deep love and passion.</p>
-            <p class="price">₱1599.00</p>
-            <form action="{{ url_for('add_to_cart', product_id=4) }}" method="POST">
-                <button type="submit" class="add-btn">Add to Cart</button>
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/wedding/wedding4.jpeg') }}" alt="4">
+            <h3>The Ivory Stream</h3>
+            <p>A modern study in purity, featuring sleek, sculptural White Calla Lilies softened by a whisper of airy, delicate grasses.</p>
+            <p class="price">₱1599</p>
+             <!-- Corrected Product ID: ID 4 -->
+             <form action="{{ url_for('add_to_cart', product_id=4) }}" method="POST">
+                 <label>Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
             </form>
         </div>
 
-        <!-- Product 5 -->
         <div class="product-card">
-            <img src="{{ url_for('static', filename='images/flower5.jpg') }}" alt="Pastel Dreams">
-            <h3>Pastel Dreams</h3>
-            <p>Soft pastel flowers perfect for birthdays or thank-you gifts.</p>
-            <p class="price">₱1699.00</p>
-            <form action="{{ url_for('add_to_cart', product_id=5) }}" method="POST">
-                <button type="submit" class="add-btn">Add to Cart</button>
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/anniversary/a1.jpeg') }}" alt="1">
+            <h3>Crimson Bouquet</h3>
+            <p>A breathtaking collection of the freshest crimson roses, meticulously arranged and elegantly tied with a pearlescent white bow. This bouquet is a timeless symbol of passionate love and heartfelt devotion, perfect for expressing your deepest affections.</p>
+            <p class="price">₱3499</p>
+             <!-- Corrected Product ID: ID 1001 -->
+             <form action="{{ url_for('add_to_cart', product_id=1001) }}" method="POST">
+                 <label>Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
             </form>
         </div>
 
-        <!-- Product 6 -->
         <div class="product-card">
-            <img src="{{ url_for('static', filename='images/flower6.jpg') }}" alt="Lavender Bliss">
-            <h3>Lavender Bliss</h3>
-            <p>Fragrant lavender blooms that bring calm and grace.</p>
-            <p class="price">₱1999.00</p>
-            <form action="{{ url_for('add_to_cart', product_id=6) }}" method="POST">
-                <button type="submit" class="add-btn">Add to Cart</button>
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/anniversary/a2.jpeg') }}" alt="1">
+            <h3>Starlight Serenade</h3>
+            <p>An ethereal and enchanting mix, this bouquet features the majestic, freckled petals of Pink Stargazer Lilies, harmoniously surrounded by a soft cloud of delicate blush and cream roses. Accented with sprigs of pure white stock flowers, this arrangement is wrapped in layers of pale pink and white, capturing the feeling of a dreamy, romantic evening. Perfect for celebrating purity, prosperity, and profound joy.</p>
+            <p class="price">₱3500</p>
+             <!-- Corrected Product ID: ID 1002 -->
+             <form action="{{ url_for('add_to_cart', product_id=1002) }}" method="POST">
+                 <label>Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
             </form>
         </div>
 
-        <!-- Product 7 -->
         <div class="product-card">
-            <img src="{{ url_for('static', filename='images/flower7.jpg') }}" alt="Blushing Beauty">
-            <h3>Blushing Beauty</h3>
-            <p>Soft pink roses for a gentle touch of romance.</p>
-            <p class="price">₱1799.00</p>
-            <form action="{{ url_for('add_to_cart', product_id=7) }}" method="POST">
-                <button type="submit" class="add-btn">Add to Cart</button>
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/anniversary/a3.jpeg') }}" alt="1">
+            <h3>Opulent Dream</h3>
+            <p>A breathtaking, grand statement piece overflowing with hundreds of champagne and soft blush roses, creating a spectacular ombre dome. Encased in voluminous layers of sheer white mesh, crinkle paper, and petal-pink matte wrapping, this bouquet is the ultimate expression of admiration, extravagance, and endless love.</p>
+            <p class="price">₱4900</p>
+             <!-- Corrected Product ID: ID 1003 -->
+             <form action="{{ url_for('add_to_cart', product_id=1003) }}" method="POST">
+                 <label>Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
             </form>
         </div>
 
-        <!-- Product 8 -->
+
         <div class="product-card">
-            <img src="{{ url_for('static', filename='images/flower8.jpg') }}" alt="Tropical Glow">
-            <h3>Tropical Glow</h3>
-            <p>Vibrant tropical blooms for a burst of color and joy.</p>
-            <p class="price">₱2499.00</p>
-            <form action="{{ url_for('add_to_cart', product_id=8) }}" method="POST">
-                <button type="submit" class="add-btn">Add to Cart</button>
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/birthday/bday1.jpeg') }}" alt="2">
+            <h3>Island Dusk</h3>
+            <p>A sophisticated vertical arrangement featuring lush pink lilies and subtle pink spray roses, accented by deep maroon foliage and wrapped in chic, rustic kraft paper for a touch of refined, tropical elegance.</p>
+            <p class="price">₱4500</p>
+             <!-- Corrected Product ID: ID 101 -->
+             <form action="{{ url_for('add_to_cart', product_id=101) }}" method="POST">
+                 <label>Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
             </form>
         </div>
+
+         <div class="product-card">
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/birthday/bday2.jpeg') }}" alt="2">
+            <h3>Ivory Whisper</h3>
+            <p>A timeless bouquet of exquisite, creamy white roses nestled amongst rich magnolia leaves, wrapped in neutral kraft paper and tied with a sophisticated forest-green satin ribbon, conveying purity and deep respect.</p>
+            <p class="price">₱4800</p>
+             <!-- Corrected Product ID: ID 102 -->
+             <form action="{{ url_for('add_to_cart', product_id=102) }}" method="POST">
+                 <label>Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
+            </form>
+        </div>
+
+         <div class="product-card">
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/birthday/bday3.jpeg') }}" alt="2">
+            <h3>Sweet Duet</h3>
+            <p>A charming mix of rich burgundy spray roses and large, creamy white roses, complemented by lush foliage and wrapped in soft pink and white paper, finished with a passionate red satin bow.</p>
+            <p class="price">₱3600</p>
+             <!-- Corrected Product ID: ID 103 -->
+             <form action="{{ url_for('add_to_cart', product_id=103) }}" method="POST">
+                 <label>Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
+            </form>
+        </div>
+
+         <div class="product-card">
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/birthday/bday4.jpeg') }}" alt="2">
+            <h3>Blush Bloom</h3>
+            <p>A tender arrangement combining ruffled pink carnations, soft blush roses, and delicate white Alstroemeria, surrounded by abundant greenery and beautifully wrapped in coordinating pink paper with a satin ribbon.</p>
+            <p class="price">₱4500</p>
+             <!-- Corrected Product ID: ID 104 -->
+             <form action="{{ url_for('add_to_cart', product_id=104) }}" method="POST">
+                 <label>Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
+            </form>
+        </div>
+
+        <div class="product-card">
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/graduation/g1.jpg') }}" alt="2">
+            <h3>Achievement Teddy</h3>
+            <p>A charming celebratory bouquet featuring a graduation-cap-wearing teddy bear nestled among soft pink and white Gerbera daisies, accented with tall pink Stock flowers, beautifully wrapped in soft pink paper.</p>
+            <p class="price">₱5500</p>
+             <!-- Corrected Product ID: ID 10001 -->
+             <form action="{{ url_for('add_to_cart', product_id=10001) }}" method="POST">
+                 <label>Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
+            </form>
+        </div>
+
+        <div class="product-card">
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/graduation/g2.jpg') }}" alt="2">
+            <h3>Rustic Rhapsody</h3>
+            <p>A sophisticated, highly textural bouquet blending deep mauve roses, striking crimson gladioli, and soft pink carnations, accented with pale blue and white fillers and wispy grass, wrapped elegantly in cream and dark charcoal paper.</p>
+            <p class="price">₱3800</p>
+             <!-- Corrected Product ID: ID 10002 -->
+             <form action="{{ url_for('add_to_cart', product_id=10002) }}" method="POST">
+                 <label>Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
+            </form>
+        </div>
+
+        <div class="product-card">
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/graduation/g3.jpg') }}" alt="2">
+            <h3>Pearl Petal Promise</h3>
+            <p>A luxurious, romantic arrangement featuring large pink lilies dusted with pearlescent accents, nestled among creamy white and blush pink roses and large white tulip-like blooms, finished with a heart-jeweled pink ribbon.</p>
+            <p class="price">₱4700</p>
+             <!-- Corrected Product ID: ID 10003 -->
+             <form action="{{ url_for('add_to_cart', product_id=10003) }}" method="POST">
+                 <label>Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
+            </form>
+        </div>
+
+        <div class="product-card">
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/graduation/g4.jpg') }}" alt="2">
+            <h3>Minted Morning</h3>
+            <p>A sophisticated, monochromatic bouquet featuring crisp white roses and unique pale mint-green blooms, accented by tall, spiky green filler, all wrapped in textured sage-green paper for an elegant, contemporary look.</p>
+            <p class="price">₱4800</p>
+             <!-- Corrected Product ID: ID 10004 -->
+             <form action="{{ url_for('add_to_cart', product_id=10004) }}" method="POST">
+                 <label>Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
+            </form>
+        </div>
+
+        <div class="product-card">
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/valentines/v1.jpg') }}" alt="2">
+            <h3>Heart's Desire</h3>
+            <p>A luxurious arrangement of deep velvet red roses meticulously placed to form a perfect heart shape, enveloped in crisp white tissue and finished with a shimmering, jeweled white satin bow—the ultimate declaration of love.</p>
+            <p class="price">₱4890</p>
+             <!-- Corrected Product ID: ID 100001 -->
+             <form action="{{ url_for('add_to_cart', product_id=100001) }}" method="POST">
+                 <label>Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
+            </form>
+        </div>
+
+         <div class="product-card">
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/valentines/v2.jpg') }}" alt="2">
+            <h3>Valentine's Vow</h3>
+            <p>A lavish and layered bouquet overflowing with deep red roses, light pink spray roses, and ruffled carnations, framed by bright red decorative fringe and accented with a custom ribbon declaring, "Be my Valentine?"</p>
+            <p class="price">₱6000</p>
+             <!-- Corrected Product ID: ID 100002 -->
+             <form action="{{ url_for('add_to_cart', product_id=100002) }}" method="POST">
+                 <label>Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
+            </form>
+        </div>
+
+        <div class="product-card">
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/valentines/v3.jpg') }}" alt="2">
+            <h3>Fuchsia Fascination</h3>
+            <p>A vibrant arrangement of deep fuchsia roses accented with delicate white fillers and subtle greenery, dramatically wrapped in layers of bold and soft pink paper and tied with a matching ribbon.</p>
+            <p class="price">₱7000</p>
+             <!-- Corrected Product ID: ID 100003 -->
+             <form action="{{ url_for('add_to_cart', product_id=100003) }}" method="POST">
+                 <label>Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
+            </form>
+        </div>
+
+         <div class="product-card">
+            <!-- Corrected Image Path: Removed subdirectory -->
+            <img src="{{ url_for('static', filename='images/valentines/v4.jpg') }}" alt="2">
+            <h3>Pure Heart Grande</h3>
+            <p>An extravagant, dome-shaped heart crafted from hundreds of pristine, creamy white roses, set in a clear vase with exposed green stems and finished with a delicate pink satin ribbon—a powerful symbol of pure, deep love and admiration.</p>
+            <p class="price">₱5900</p>
+             <!-- Corrected Product ID: ID 100004 -->
+             <form action="{{ url_for('add_to_cart', product_id=100004) }}" method="POST">
+                 <label>Quantity:</label>
+    <input type="number" name="quantity" value="1" min="1" style="width: 50px; text-align: center; margin-left: 0.5rem; border-radius: 6px; border: 1px solid #ccc; padding: 0.3rem;">
+                <button type="submit" class="add-btn" style="margin-left: 1rem;">Add to Cart</button>
+            </form>
+        </div>
+
+
+
 
     </div>
 </section>
 
 {% endblock %}
-

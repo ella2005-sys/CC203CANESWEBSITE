@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+.admin-orders {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 2rem;
+    min-height: 90vh;
+    font-family: 'Poppins', sans-serif;
+}
+
+.admin-orders h2 {
+    font-size: 2.8rem;
+    color: #ff66b2; /* pink */
+    text-align: center;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+.section-card {
+    width: 100%;
+    max-width: 1000px;
+    background: rgba(255,182,193,0.15); /* soft pink glass */
+    backdrop-filter: blur(6px);
+    padding: 1.5rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    color: #2c2c2c; /* dark text */
+}
+
+.table-responsive { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 0.75rem 1rem; font-size: 0.95rem; }
+th { background: rgba(255,182,193,0.25); text-transform: uppercase; }
+tr:nth-child(even) { background: rgba(255,182,193,0.10); }
+img { border-radius: 6px; max-width: 60px; }
+
+.status-form {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.status-form select {
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    border: none;
+    background: #ff66b2;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.status-form button {
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    border: none;
+    background: #ff85c1;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-view {
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    border: none;
+    background: #ff66b2;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-view:hover, .status-form button:hover {
+    background: #ffb3d9;
+    transform: scale(1.05);
+    transition: 0.2s ease;
+}
+</style>
+
+<section class="admin-orders">
+    <h2>Orders</h2>
+
+    <div class="section-card">
+        {% if orders %}
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Tracking #</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Status</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.tracking_number or "Not assigned" }}</td>
+                        <td>{{ order.fullname }}</td>
+                        <td>{{ order.phone }}</td>
+                        <td>
+                            <form method="POST" action="{{ url_for('admin_update_order_status', order_id=order.id) }}" class="status-form">
+                                <select name="status">
+                                    <option value="Processing" {% if order.status=='Processing' %}selected{% endif %}>Processing</option>
+                                    <option value="Shipped" {% if order.status=='Shipped' %}selected{% endif %}>Shipped</option>
+                                    <option value="Delivered" {% if order.status=='Delivered' %}selected{% endif %}>Delivered</option>
+                                </select>
+                                <input type="text" name="tracking_number" placeholder="Tracking #" value="{{ order.tracking_number or '' }}">
+                                <button type="submit">Update</button>
+                            </form>
+                        </td>
+                        <td>₱{{ "%.2f"|format(order.total) }}</td>
+                        <td>
+                            <a href="{{ url_for('admin_order_details', order_id=order.id) }}" class="btn-view">View</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p>No orders found.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

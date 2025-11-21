@@ -1,23 +1,61 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block content %}
-<section class="info-page">
-    <h1>Your Cart</h1>
-    {% if cart and cart|length > 0 %}
-        <table class="cart-table">
-            <tr>
-                <th>Flower</th>
-                <th>Price</th>
-            </tr>
-            {% for item in cart %}
-            <tr>
-                <td>{{ item.name }}</td>
-                <td>₱{{ item.price }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        <h3 class="cart-total">Total: ₱{{ total }}</h3>
+<div class="container" style="max-width: 900px; margin: auto; padding: 20px;">
+    <h2 style="text-align: center; color: #c2185b; margin-bottom: 30px;">My Cart</h2>
+
+    {% if cart_items %}
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+        {% for item in cart_items %}
+        <div style="display: flex; align-items: center; background: #fff0f5; border-radius: 12px; padding: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+            <img src="{{ url_for('static', filename='images/' + item.image) }}" alt="{{ item.name }}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px; margin-right: 20px;">
+            <div style="flex: 1;">
+                <h4 style="margin: 0 0 5px 0; color: #6a1b9a;">{{ item.name }}</h4>
+                <p style="margin: 0; font-weight: bold;">${{ item.price }}</p>
+                <div style="margin-top: 10px; display: flex; align-items: center; gap: 10px;">
+                    <a href="{{ url_for('decrease_item', product_id=item.id) }}" class="btn-qty">-</a>
+                    <span>{{ item.qty }}</span>
+                    <a href="{{ url_for('increase_item', product_id=item.id) }}" class="btn-qty">+</a>
+                    <a href="{{ url_for('remove_item', product_id=item.id) }}" style="margin-left: auto; color: #e53935; text-decoration: none; font-weight: bold;">Remove</a>
+                </div>
+            </div>
+            <div style="font-weight: bold; color: #4a148c;">${{ item.item_total }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div style="margin-top: 30px; text-align: right;">
+        <p style="font-size: 18px;">Subtotal: <strong>₱{{ subtotal }}</strong></p>
+        <p style="font-size: 18px;">Shipping: <strong>₱{{ shipping_cost }}</strong></p>
+        <h3 style="color: #c2185b;">Total: ₱{{ total }}</h3>
+
+        <div style="margin-top: 20px;">
+            <a href="{{ url_for('shop') }}" style="padding: 10px 20px; background: #f8bbd0; color: #6a1b9a; border-radius: 6px; text-decoration: none; margin-right: 10px;">Continue Shopping</a>
+            <a href="{{ url_for('checkout') }}" style="padding: 10px 20px; background: #c2185b; color: #fff; border-radius: 6px; text-decoration: none;">Proceed to Checkout</a>
+        </div>
+    </div>
     {% else %}
-        <p>Your cart is empty 🌸</p>
+    <p style="text-align: center; font-size: 18px; color: #6a1b9a;">Your cart is empty.</p>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{{ url_for('shop') }}" style="padding: 10px 20px; background: #f8bbd0; color: #6a1b9a; border-radius: 6px; text-decoration: none;">Go Shopping</a>
+    </div>
     {% endif %}
-</section>
+</div>
+
+<style>
+.btn-qty {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    line-height: 23px;
+    border-radius: 4px;
+    background: #f48fb1;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+.btn-qty:hover {
+    background: #c2185b;
+}
+</style>
 {% endblock %}

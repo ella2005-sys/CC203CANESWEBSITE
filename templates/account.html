@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+.account-section {
+    padding: 3rem 2rem;
+    font-family: 'Poppins', sans-serif;
+    color: #333;  /* Change default text to dark gray/purple */
+}
+
+.account-section h2 {
+    color: #c56bff; /* Pink/purple header */
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.orders-table {
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+    border-collapse: collapse;
+    background: rgba(255,182,193,0.2); /* soft pink semi-transparent */
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.orders-table th, .orders-table td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255,182,193,0.4);
+    color: #3a0ca3; /* Darker text for contrast */
+    text-align: left;
+}
+
+.orders-table th {
+    background-color: rgba(255,182,193,0.4); /* soft pink */
+    color: #fff; /* keep headers white for emphasis */
+}
+
+.orders-table tr:last-child td {
+    border-bottom: none;
+}
+</style>
+
+<section class="account-section">
+    <h2>📦 My Orders</h2>
+
+    {% if orders %}
+    <table class="orders-table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Payment</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order['id'] }}</td>
+                <td>{{ order['created_at'] }}</td>
+                <td>₱{{ '%.2f'|format(order['total']) }}</td>
+                <td>{{ order['payment_method'] }}</td>
+                <td>Processing</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p style="text-align:center; margin-top:2rem;">You have no orders yet.</p>
+    {% endif %}
+</section>
+
+{% endblock %}

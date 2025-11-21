@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+/* Center the Quiz Container */
+.quiz-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 1rem;
+    min-height: 70vh; /* Ensures it looks good on screens of various heights */
+    background-color: #fff0f6; /* Soft pink background to match your site */
+}
+
+#quiz-container {
+    max-width: 800px;
+    width: 100%;
+    background: #fff;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(183, 126, 220, 0.2);
+    text-align: center;
+}
+
+#quiz-container h2 {
+    color: #b34786; /* Your primary color */
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+#quiz-container h4 {
+    color: #8c2d5f; /* A darker pink for emphasis */
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.question {
+    text-align: left;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #ffe0f0; /* Light pink separator */
+    padding-bottom: 1rem;
+}
+
+/* Style for the answer buttons (using your existing pink styles) */
+.answer-btn {
+    background: #ff99c8;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background 0.3s, transform 0.1s;
+    font-weight: 500;
+}
+.answer-btn:hover {
+    background: #e673b8;
+    transform: translateY(-1px);
+}
+
+/* Styling the result button */
+#get-result {
+    background: #b34786;
+    color: white;
+    font-size: 1.2rem;
+    padding: 12px 30px;
+    margin-top: 2rem;
+}
+#get-result:hover {
+    background: #8c2d5f;
+}
+</style>
+
+<section class="quiz-wrapper">
+    <div id="quiz-container">
+        <h2>💐 Find Your Perfect Bouquet!</h2>
+        <p class="text-center mb-5">Answer a few questions to discover the arrangement that fits the moment.</p>
+
+        <div id="quiz-content">
+            <div class="question" data-question="1">
+                <h4>Question 1 of 10: What feeling do you primarily want to convey?</h4>
+                <button data-value="romantic" class="answer-btn">Passionate Love ❤️</button>
+                <button data-value="joyful" class="answer-btn">Bright Celebration 🥳</button>
+                <button data-value="elegant" class="answer-btn">Subtle Grace ✨</button>
+                <button data-value="achievement" class="answer-btn">High Achievement 🏆</button>
+            </div>
+
+            <div class="question d-none" data-question="2">
+                <h4>Question 2 of 10: Which setting best matches the recipient's personal style?</h4>
+                <button data-value="romantic" class="answer-btn">Candlelit Dinner</button>
+                <button data-value="joyful" class="answer-btn">Sunny Garden Party</button>
+                <button data-value="elegant" class="answer-btn">Modern Art Gallery</button>
+                <button data-value="achievement" class="answer-btn">Professional Office</button>
+            </div>
+
+            <div class="question d-none" data-question="3">
+                <h4>Question 3 of 10: What is your preferred color palette?</h4>
+                <button data-value="romantic" class="answer-btn">Deep Reds & Pinks</button>
+                <button data-value="joyful" class="answer-btn">Vibrant Yellows & Oranges</button>
+                <button data-value="elegant" class="answer-btn">Soft Whites & Creams</button>
+                <button data-value="achievement" class="answer-btn">Bold & Unique Colors</button>
+            </div>
+
+            <div class="question d-none" data-question="4">
+                <h4>Question 4 of 10: What is the overall "vibe" you're aiming for?</h4>
+                <button data-value="romantic" class="answer-btn">Intimate & Sentimental</button>
+                <button data-value="joyful" class="answer-btn">Spontaneous & Fun</button>
+                <button data-value="elegant" class="answer-btn">Classic & Timeless</button>
+                <button data-value="achievement" class="answer-btn">Sophisticated & Modern</button>
+            </div>
+
+            <div class="question d-none" data-question="5">
+                <h4>Question 5 of 10: Which flower type is your favorite?</h4>
+                <button data-value="romantic" class="answer-btn">Roses</button>
+                <button data-value="joyful" class="answer-btn">Sunflowers/Daisies</button>
+                <button data-value="elegant" class="answer-btn">Lilies/Callas</button>
+                <button data-value="achievement" class="answer-btn">Orchids/Thistles</button>
+            </div>
+
+            <div class="question d-none" data-question="6">
+                <h4>Question 6 of 10: What size statement do you want to make?</h4>
+                <button data-value="romantic" class="answer-btn">Lush & Voluminous</button>
+                <button data-value="joyful" class="answer-btn">Medium & Cheerful</button>
+                <button data-value="elegant" class="answer-btn">Sleek & Sculptural</button>
+                <button data-value="achievement" class="answer-btn">Tall & Impressive</button>
+            </div>
+
+            <div class="question d-none" data-question="7">
+                <h4>Question 7 of 10: How do you prefer the wrapping style?</h4>
+                <button data-value="romantic" class="answer-btn">Soft Mesh & Ribbon</button>
+                <button data-value="joyful" class="answer-btn">Bright Paper & Bow</button>
+                <button data-value="elegant" class="answer-btn">Neutral Kraft & Twine</button>
+                <button data-value="achievement" class="answer-btn">Textured & Layered</button>
+            </div>
+
+            <div class="question d-none" data-question="8">
+                <h4>Question 8 of 10: What is your general budget for the bouquet?</h4>
+                <button data-value="joyful" class="answer-btn">Entry/Mid-range</button>
+                <button data-value="achievement" class="answer-btn">Mid-range</button>
+                <button data-value="romantic" class="answer-btn">Premium</button>
+                <button data-value="elegant" class="answer-btn">Luxury/Extravagant</button>
+            </div>
+
+            <div class="question d-none" data-question="9">
+                <h4>Question 9 of 10: Is this bouquet tied to a formal date or event?</h4>
+                <button data-value="elegant" class="answer-btn">Yes, a formal event</button>
+                <button data-value="romantic" class="answer-btn">Yes, an important date</button>
+                <button data-value="achievement" class="answer-btn">A celebration of the past</button>
+                <button data-value="joyful" class="answer-btn">No, just because!</button>
+            </div>
+
+            <div class="question d-none" data-question="10">
+                <h4>Question 10 of 10: Which phrase resonates most with your goal?</h4>
+                <button data-value="romantic" class="answer-btn">"Always and Forever."</button>
+                <button data-value="joyful" class="answer-btn">"Have a fantastic day!"</button>
+                <button data-value="elegant" class="answer-btn">"My deepest respect."</button>
+                <button data-value="achievement" class="answer-btn">"You earned this!"</button>
+            </div>
+        </div>
+
+        <button id="get-result" class="answer-btn d-none">See My Perfect Bouquet!</button>
+        <p id="result-text" class="text-center mt-3" style="color: #b34786; font-size: 1.1rem;"></p>
+    </div>
+</section>
+
+<script>
+    const quizContent = document.getElementById('quiz-content');
+    const resultButton = document.getElementById('get-result');
+    const resultText = document.getElementById('result-text');
+    let currentQuestion = 1;
+    // Four scoring categories corresponding to your occasions
+    let scores = {'romantic': 0, 'joyful': 0, 'elegant': 0, 'achievement': 0};
+
+    // --- MAPPING ---
+    // Maps the highest score category to one of your existing Flask occasion routes
+    const RESULT_MAP = {
+        'romantic': '{{ url_for("show_occasion", category="valentines") }}', // Most Passionate/Love
+        'joyful': '{{ url_for("show_occasion", category="birthday") }}',     // Bright/Spontaneous
+        'elegant': '{{ url_for("show_occasion", category="anniversary") }}',  // Classic/Sentimental
+        'achievement': '{{ url_for("show_occasion", category="graduation") }}' // Success/Impressive
+    };
+
+    // Function to handle answer clicks
+    quizContent.addEventListener('click', function(event) {
+        if (event.target.classList.contains('answer-btn')) {
+            const button = event.target;
+            const value = button.dataset.value;
+            scores[value]++; // Increment score for the selected type
+
+            // Highlight selected button (optional visual feedback)
+            const parentQuestion = button.closest('.question');
+            parentQuestion.querySelectorAll('.answer-btn').forEach(btn => btn.disabled = true);
+            button.style.backgroundColor = '#8c2d5f'; // Darker pink on selection
+
+            // Hide current question and move to next
+            setTimeout(() => {
+                parentQuestion.classList.add('d-none');
+                currentQuestion++;
+
+                // Show next question or final result button
+                const nextQuestion = document.querySelector(`.question[data-question="${currentQuestion}"]`);
+                if (nextQuestion) {
+                    nextQuestion.classList.remove('d-none');
+                } else {
+                    resultButton.classList.remove('d-none');
+                }
+            }, 300); // Slight delay for visual effect
+        }
+    });
+
+    // Function to calculate and redirect
+    resultButton.addEventListener('click', function() {
+        let maxScore = -1;
+        let resultType = '';
+
+        // Find the type with the highest score
+        for (const type in scores) {
+            if (scores[type] > maxScore) {
+                maxScore = scores[type];
+                resultType = type;
+            }
+        }
+
+        const destination = RESULT_MAP[resultType];
+
+        resultButton.disabled = true; // Prevent double click
+        resultButton.textContent = 'Calculating your match...';
+
+        if (destination) {
+            resultText.innerHTML = `Perfect match! Directing you to our **${resultType.toUpperCase()}** collection...`;
+            // Redirect the user after a short delay
+            setTimeout(() => {
+                window.location.href = destination;
+            }, 1500);
+        } else {
+            resultText.innerHTML = 'Could not find a clear match. Please try again!';
+        }
+    });
+</script>
+
+{% endblock %}

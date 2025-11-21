@@ -2,7 +2,6 @@
 {% block content %}
 
 <style>
-/* Hero Section */
 .hero {
     display: flex;
     flex-direction: column;
@@ -10,195 +9,47 @@
     align-items: center;
     text-align: center;
     padding: 5rem 2rem 3rem;
-    background-image: url("{{ url_for('static', filename='images/wedding-bg.jpeg') }}");
+    background-image: url("{{ url_for('static', filename='images/occasionbg.jpg') }}");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     color: #b34786;
 }
-.hero h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-.hero p {
-    font-size: 1.2rem;
-    color: #8c2d5f;
-    max-width: 700px;
-    line-height: 1.7;
-}
+.hero h1 { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
+.hero p { font-size: 1.2rem; color: #8c2d5f; max-width: 700px; line-height: 1.7; }
 
-/* Shop Section */
-.shop-section {
-    text-align: center;
-    padding: 4rem 2rem;
-    background-color: #fff0f6;
-}
-.shop-section h3 {
-    font-size: 2rem;
-    color: #b34786;
-    margin-bottom: 3rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-.shop-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-.product-card {
-    background: #fff;
-    border-radius: 20px;
-    padding: 1.5rem;
-    box-shadow: 0 8px 20px rgba(183, 126, 220, 0.15);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.product-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(183, 126, 220, 0.3);
-}
-.product-card img {
-    width: 100%;
-    max-width: 220px;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 15px;
-    margin-bottom: 1rem;
-}
-.product-card h3 {
-    font-size: 1.3rem;
-    color: #b34786;
-    margin-bottom: 0.5rem;
-}
-.product-card p {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 0.5rem;
-}
-.price {
-    font-size: 1.2rem;
-    color: #b34786;
-    font-weight: 600;
-    margin-top: 0.5rem;
-}
-.add-btn {
-    background: #ff99c8;
-    border: none;
-    padding: 8px 14px;
-    color: white;
-    border-radius: 6px;
-    cursor: pointer;
-    width: 100%;
-    transition: 0.3s;
-}
-.add-btn:hover {
-    background: #e673b8;
-}
+.shop-section { text-align: center; padding: 4rem 2rem; background-color: #fff0f6; }
+.shop-section h3 { font-size: 2rem; color: #b34786; margin-bottom: 3rem; letter-spacing: 1px; text-transform: uppercase; }
+.shop-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
+.product-card { background: #fff; border-radius: 20px; padding: 1.5rem; box-shadow: 0 8px 20px rgba(183, 126, 220, 0.15); text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.product-card:hover { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(183, 126, 220, 0.3); }
+.product-card img { width: 100%; max-width: 220px; height: 220px; object-fit: cover; border-radius: 15px; margin-bottom: 1rem; }
+.product-card h3 { font-size: 1.3rem; color: #b34786; margin-bottom: 0.5rem; }
+.product-card p { font-size: 1rem; color: #555; margin-bottom: 0.5rem; }
+.price { font-size: 1.2rem; color: #b34786; font-weight: 600; margin-top: 0.5rem; }
+.add-btn { background: #ff99c8; border: none; padding: 8px 14px; color: white; border-radius: 6px; cursor: pointer; width: 100%; transition: 0.3s; }
+.add-btn:hover { background: #e673b8; }
 </style>
 
-
-<!-- Hero Section -->
 <section class="hero">
     <h1>{{ occasion_type }} Flowers</h1>
     <p>{{ message }}</p>
 </section>
 
-<!-- Shop Section -->
 <section class="shop-section">
     <h3>🌸 Our Collection 🌸</h3>
     <div class="shop-grid">
-            {% for product in occasion_products %}
-        <!-- Product 1 -->
+        {% for product in occasion_products %}
         <div class="product-card">
-            <img src="{{ url_for('static', filename='images/wedding1.jpeg') }}" alt="Purities Embrace">
-            <h3>Purities Embrace</h3>
-            <p>White lilies symbolizing innocence and renewal.</p>
-            <p class="price">₱1899.00</p>
-            <form action="{{ url_for('add_to_cart', product_id=1) }}" method="POST">
+            <img src="{{ url_for('static', filename='images/' + occasion_type.lower() + '/' + product.image) }}" alt="{{ product.name }}">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <p class="price">₱{{ product.price }}</p>
+            <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="POST">
                 <button type="submit" class="add-btn">Add to Cart</button>
             </form>
         </div>
-
-        <!-- Product 2 -->
-        <div class="product-card">
-            <img src="{{ url_for('static', filename='images/wedding2.jpeg') }}" alt="Holly Kisses">
-            <h3>Holly Kisses</h3>
-            <p>A charming bouquet of whites and pinks capturing the festive spirit.</p>
-            <p class="price">₱2399.00</p>
-            <form action="{{ url_for('add_to_cart', product_id=2) }}" method="POST">
-                <button type="submit" class="add-btn">Add to Cart</button>
-            </form>
-        </div>
-
-        <!-- Product 3 -->
-        <div class="product-card">
-            <img src="{{ url_for('static', filename='images/wedding3.jpeg') }}" alt="Sunny Delight">
-            <h3>Sunny Delight</h3>
-            <p>Bright and cheerful sunflowers to light up your day.</p>
-            <p class="price">₱1299.00</p>
-            <form action="{{ url_for('add_to_cart', product_id=3) }}" method="POST">
-                <button type="submit" class="add-btn">Add to Cart</button>
-            </form>
-        </div>
-
-        <!-- Product 4 -->
-        <div class="product-card">
-            <img src="{{ url_for('static', filename='images/wedding4.jpeg') }}" alt="Romantic Roses">
-            <h3>Romantic Roses</h3>
-            <p>Classic red roses to express deep love and passion.</p>
-            <p class="price">₱1599.00</p>
-            <form action="{{ url_for('add_to_cart', product_id=4) }}" method="POST">
-                <button type="submit" class="add-btn">Add to Cart</button>
-            </form>
-        </div>
-
-        <!-- Product 5 -->
-        <div class="product-card">
-            <img src="{{ url_for('static', filename='images/wedding5.jpeg') }}" alt="Pastel Dreams">
-            <h3>Pastel Dreams</h3>
-            <p>Soft pastel flowers perfect for birthdays or thank-you gifts.</p>
-            <p class="price">₱1699.00</p>
-            <form action="{{ url_for('add_to_cart', product_id=5) }}" method="POST">
-                <button type="submit" class="add-btn">Add to Cart</button>
-            </form>
-        </div>
-
-        <!-- Product 6 -->
-        <div class="product-card">
-            <img src="{{ url_for('static', filename='images/wedding6.jpeg') }}" alt="Lavender Bliss">
-            <h3>Lavender Bliss</h3>
-            <p>Fragrant lavender blooms that bring calm and grace.</p>
-            <p class="price">₱1999.00</p>
-            <form action="{{ url_for('add_to_cart', product_id=6) }}" method="POST">
-                <button type="submit" class="add-btn">Add to Cart</button>
-            </form>
-        </div>
-
-        <!-- Product 7 -->
-        <div class="product-card">
-            <img src="{{ url_for('static', filename='images/wedding7.jpeg') }}" alt="Blushing Beauty">
-            <h3>Blushing Beauty</h3>
-            <p>Soft pink roses for a gentle touch of romance.</p>
-            <p class="price">₱1799.00</p>
-            <form action="{{ url_for('add_to_cart', product_id=7) }}" method="POST">
-                <button type="submit" class="add-btn">Add to Cart</button>
-            </form>
-        </div>
-
-        <!-- Product 8 -->
-        <div class="product-card">
-            <img src="{{ url_for('static', filename='images/wedding8.jpeg') }}" alt="Tropical Glow">
-            <h3>Tropical Glow</h3>
-            <p>Vibrant tropical blooms for a burst of color and joy.</p>
-            <p class="price">₱2499.00</p>
-            <form action="{{ url_for('add_to_cart', product_id=8) }}" method="POST">
-                <button type="submit" class="add-btn">Add to Cart</button>
-            </form>
-        </div>
- {% endfor %}
+        {% endfor %}
     </div>
 </section>
 

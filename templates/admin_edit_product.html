@@ -1,24 +1,90 @@
 {% extends 'base.html' %}
 {% block content %}
-<section class="admin-edit-product">
+<style>
+.admin-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 90vh;
+    padding: 2rem;
+    font-family: 'Poppins', sans-serif;
+    background-color: rgba(255, 182, 193, 0.1); /* soft pink background */
+}
+
+.admin-edit h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #ff69b4; /* hot pink */
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.admin-edit form {
+    background: rgba(255, 182, 193, 0.15); /* light pink overlay */
+    backdrop-filter: blur(6px);
+    padding: 2rem;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 500px;
+    color: #000; /* dark letters */
+}
+
+.admin-edit label {
+    display: block;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.admin-edit input[type="text"],
+.admin-edit input[type="number"],
+.admin-edit input[type="file"] {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.2);
+    margin-bottom: 1rem;
+}
+
+.admin-edit img {
+    max-width: 150px;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+}
+
+.admin-edit button {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #ff69b4;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.admin-edit button:hover {
+    background-color: #ff85c1;
+    transform: scale(1.02);
+}
+</style>
+
+<section class="admin-edit">
     <h2>Edit Product</h2>
-    <form method="POST" class="form-box">
-        <label>Name:</label>
-        <input type="text" name="name" value="{{ product.name }}" required>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="name">Product Name</label>
+        <input type="text" name="name" id="name" value="{{ product['name'] }}" required>
 
-        <label>Description:</label>
-        <textarea name="description">{{ product.description }}</textarea>
+        <label for="price">Price</label>
+        <input type="number" name="price" id="price" value="{{ product['price'] }}" step="0.01" required>
 
-        <label>Price:</label>
-        <input type="number" name="price" value="{{ product.price }}" step="0.01" required>
+        <label>Current Image</label>
+        <img src="{{ url_for('static', filename='images/' + product['image']) }}" alt="Product Image">
 
-        <label>Stock:</label>
-        <input type="number" name="stock" value="{{ product.stock }}" required>
+        <label for="image">Change Image (optional)</label>
+        <input type="file" name="image" id="image">
 
-        <label>Image URL:</label>
-        <input type="text" name="image" value="{{ product.image }}">
-
-        <button type="submit">Save Changes</button>
+        <button type="submit">Update Product</button>
     </form>
 </section>
 {% endblock %}
